@@ -1,3 +1,8 @@
-full_name = 'John Smith'
-age = 20
-is_new = True
+print('What is your name?')
+user_name = input()
+print('Hello ' + user_name +'.','Can you please tell me your age? ')
+user_age = input()
+print('Thank you ' + user_name +'.','Your age is ' + user_age + '.')
+print('Are you a new patient or existing ?')
+patient_status = input()
+print('Thank you ' + user_name +'.' , 'You are a "' + patient_status + '" patient in our system. Please have a seat and the doctor will be with you shortly.')
