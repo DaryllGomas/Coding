@@ -10,6 +10,3 @@ second = input()
 Sum = float(first) + float(second)
 #Print statement
 print ('Thank you. Sum =: ' + str(Sum))
-
-
-# ( stand by code ) print('Thank you, the sum is ' , float(first) + float(second) )
