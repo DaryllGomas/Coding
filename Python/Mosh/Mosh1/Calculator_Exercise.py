@@ -7,4 +7,9 @@ print('Please Enter the Second number to be calculated')
 #definition of the variable
 second = input()
 #Passing of str input to int/float variable
-print('Thank you, the sum is ' , int(first) + int(second) )
+Sum = float(first) + float(second)
+#Print statement
+print ('Thank you. Sum =: ' + str(Sum))
+
+
+# ( stand by code ) print('Thank you, the sum is ' , float(first) + float(second) )
