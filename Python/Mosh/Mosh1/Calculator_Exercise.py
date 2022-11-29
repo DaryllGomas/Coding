@@ -9,4 +9,4 @@ second = input()
 #Passing of str input to int/float variable
 Sum = float(first) + float(second)
 #Print statement
-print ('Thank you. Sum =: ' + str(Sum))
+print ('Thank you. Sum = ' + str(Sum))
