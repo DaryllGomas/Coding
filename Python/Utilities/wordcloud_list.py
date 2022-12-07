@@ -15,16 +15,16 @@ auth.set_access_token(access_token, access_token_secret)
 
 # Create an API object that you can use to access your Twitter data
 api = tweepy.API(auth)
-# Retrieve the most recent tweets from your timeline
-tweets = api.user_timeline()
 
-# Create a string of all the tweet texts
-tweet_text = ""
-for tweet in tweets:
-    tweet_text += tweet.text
+# Retrieve the list of words from the Twitter list you specified
+list_id = 1480583392966053888
+word_list = api.get_list(list_id)
 
-# Create a WordCloud object and pass it the text of your tweets
-wordcloud = wordcloud.WordCloud().generate(tweet_text)
+# Create a string from the list of words
+word_string = " ".join(word_list)
+
+# Create a WordCloud object and pass it the string of words
+wordcloud = wordcloud.WordCloud().generate(word_string)
 
 # Save the word cloud to an image file in the C:\WordCloud folder
 if not os.path.exists("C:\\WordCloud"):
