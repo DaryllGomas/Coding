@@ -1,14 +1,11 @@
-import tweepy,re
+import tweepy,re,time
 from wordcloud import WordCloud
 from collections import Counter
 import os,datetime
-
-
-#Key and API info
-c_k=""
-c_s=""
-a_t=""
-a_t_s=""
+c_k="-"
+c_s="-K"
+a_t="-"
+a_t_s="-"
 
 a=tweepy.OAuthHandler(c_k,c_s)
 a.set_access_token(a_t,a_t_s)
@@ -16,6 +13,9 @@ a.set_access_token(a_t,a_t_s)
 api=tweepy.API(a)
 
 list_id="1480650925869973508"
+
+# Use the "since_id" parameter to only download tweets from the last 4 hours
+tweets=tweepy.Cursor(api.list_timeline,list_id=list_id, since_id=str(int(time.time() - 4*60*60))).items()
 
 tweets=tweepy.Cursor(api.list_timeline,list_id=list_id).items()
 
@@ -63,7 +63,7 @@ wordcloud.to_file("Z:\\Python\\WordCloud\\Image\\wordcloud.png")
 
 current_date_time=datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-os.rename("Z:\\Python\\WordCloud\\Image\\wordcloud.png","Z:\\Python\\WordCloud\\Image\\wordcloud_{}.png".format(current_date_time))
+os.rename("Z:\\Python\\WordCloud\\Image\\wordcloud.png","Z:\\Python\\WordCloud\\Image\\Focused_{}.png".format(current_date_time))
 
 import matplotlib.pyplot as plt
 
