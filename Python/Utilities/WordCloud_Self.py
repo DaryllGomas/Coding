@@ -2,6 +2,7 @@ import tweepy
 import wordcloud
 import matplotlib.pyplot as plt
 import os
+import datetime
 
 # Replace the placeholders with your own API keys 
 consumer_key = "-"
@@ -33,12 +34,18 @@ for tweet in tweets:
 # Create a WordCloud object and pass it the text of your tweets
 wordcloud = wordcloud.WordCloud().generate(tweet_text)
 
-# Save the word cloud to an image file in the C:\WordCloud folder
-if not os.path.exists("C:\\WordCloud"):
-    os.makedirs("C:\\WordCloud")
+# Save the word cloud to an image file in the Z:\Python\WordCloud\Image folder
+if not os.path.exists("Z:\\Python\\WordCloud\\Image\\"):
+    os.makedirs("Z:\\Python\\WordCloud\\Image\\")
+
+# Generate the word cloud image file and save it to the Z:\Python\WordCloud\Image folder
 wordcloud.to_file("Z:\\Python\\WordCloud\\Image\\wordcloud.png")
 
+# Format the current date and time to be used as the file name
+current_date_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
+# Rename the file to the current date and time
+os.rename("Z:\\Python\\WordCloud\\Image\\wordcloud.png", "Z:\\Python\\WordCloud\\Image\\wordcloud_{}.png".format(current_date_time))
 
 # Display the word cloud
 plt.imshow(wordcloud)
