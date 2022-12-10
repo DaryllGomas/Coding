@@ -1,72 +1,59 @@
-import tweepy,re,time
+import tweepy, re, time
 from wordcloud import WordCloud
 from collections import Counter
-import os,datetime
-c_k="-"
-c_s="-K"
-a_t="-"
-a_t_s="-"
+import os, datetime
 
-a=tweepy.OAuthHandler(c_k,c_s)
-a.set_access_token(a_t,a_t_s)
+# Set your Twitter API keys and access tokens here
+c_k = "-"
+c_s = "-"
+a_t = "-"
+a_t_s = "-"
 
-api=tweepy.API(a)
+a = tweepy.OAuthHandler(c_k, c_s)
+a.set_access_token(a_t, a_t_s)
 
-list_id="1480650925869973508"
+api = tweepy.API(a)
+
+# Set the list ID here
+list_id = "1480650925869973508"
 
 # Use the "since_id" parameter to only download tweets from the last 4 hours
-tweets=tweepy.Cursor(api.list_timeline,list_id=list_id, since_id=str(int(time.time() - 4*60*60))).items()
+tweets = tweepy.Cursor(api.list_timeline, list_id=list_id, since_id=str(int(time.time() - 4*60*60))).items()
 
-tweets=tweepy.Cursor(api.list_timeline,list_id=list_id).items()
+# Join all of the tweets into a single string
+text = " ".join([tweet.text for tweet in tweets])
 
-text=" ".join([tweet.text for tweet in tweets])
+# Remove mentions of other Twitter users from the text
+text = re.sub(r"[A-Za-z0-9._%+-]*@[A-Za-z0-9.-]*", "", text)
 
-text=re.sub(r"[A-Za-z0-9._%+-]*@[A-Za-z0-9.-]*","",text)
+# Count the frequency of each word
+word_counts = Counter(text.split())
 
-word_counts=Counter(text.split())
+# Set the frequency of common words to 0 to exclude them from the word cloud
+common_words = ["_", "_xyz", "_szilagyi", "and", "the", "to", "of", "t.co", "RT", "is", "on", "in", "a", "i", "you", "for", "are", "that", "from", "with", "have", "this", "be", "the", "I", "it", "The", "_vanepps", "at"]
+for word in common_words:
+    word_counts[word] = 0
 
-# Set the frequency of the words you want to exclude to 0
-word_counts["and"] = 0
-word_counts["the"] = 0
-word_counts["to"] = 0
-word_counts["of"] = 0
-word_counts["t.co"] = 0
-word_counts["RT"] = 0
-word_counts["is"] = 0
-word_counts["on"] = 0
-word_counts["in"] = 0
-word_counts["a"] = 0
-word_counts["i"] = 0
-word_counts["you"] = 0
-word_counts["for"] = 0
-word_counts["are"] = 0
-word_counts["that"] = 0
-word_counts["from"] = 0
-word_counts["with"] = 0
-word_counts["have"] = 0
-word_counts["this"] = 0
-word_counts["be"] = 0
-word_counts["the"] = 0
-word_counts["I"] = 0
-word_counts["it"] = 0
-word_counts["The"] = 0
-word_counts[""] = 0
-word_counts["at"] = 0
+# Generate the word cloud
+wordcloud = WordCloud().generate_from_frequencies(word_counts)
 
-
-wordcloud=WordCloud().generate_from_frequencies(word_counts)
-
+# Save the word cloud to a file
 if not os.path.exists("Z:\\Python\\WordCloud\\Image\\"):
     os.makedirs("Z:\\Python\\WordCloud\\Image\\")
 
 wordcloud.to_file("Z:\\Python\\WordCloud\\Image\\wordcloud.png")
 
-current_date_time=datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+# Rename the file with the current date and time
+current_date_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+os.rename("Z:\\Python\\WordCloud\\Image\\wordcloud.png", "Z:\\Python\\WordCloud\\Image\\Focused_{}.png".format(current_date_time))
 
-os.rename("Z:\\Python\\WordCloud\\Image\\wordcloud.png","Z:\\Python\\WordCloud\\Image\\Focused_{}.png".format(current_date_time))
-
+# Display the word cloud
 import matplotlib.pyplot as plt
 
-plt.imshow(wordcloud,interpolation="bilinear")
+plt.imshow(wordcloud, interpolation="bilinear")
 plt.axis("off")
+
+# Add the file name to the bottom of the image
+plt.text(0.5, -0.2, "Focused_{}.png".format(current_date_time), horizontalalignment="center")
+
 plt.show()
