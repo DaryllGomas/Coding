@@ -19,8 +19,10 @@ api = tweepy.API(a)
 def run_task(run):
     # If the user clicked the "Yes" button, run the task
     if run:
+        #Close task window
+        root.destroy()
         # Set the list ID here
-        list_id = "-"
+        list_id = "1480650925869973508"
 
         # Use the "since_id" parameter to only download tweets from the last 6 hours
         tweets = tweepy.Cursor(api.list_timeline, list_id=list_id, since_id=str(int(time.time() - 6*60*60))).items()
@@ -34,10 +36,13 @@ def run_task(run):
         # Count the frequency of each word
         word_counts = Counter(text.split())
 
-        # Set the frequency of common words to 0 to exclude them from the word cloud
-        common_words = ["_", "_xyz", "_szilagyi", "and", "the", "to", "of", "t.co", "RT", "is", "on", "in", "a", "i", "you", "for", "are", "that", "from", "with", "have", "this", "be", "the", "I", "it", "The", "_vanepps", "at"]
+       # Set the frequency of common words to 0 to exclude them from the word cloud
+        common_words = ["They", "they", "You", "It", "In", ",", ".", "like", "&amp;", "_inc","back", "And", "has", "our", "up", "one", "would", "want", "been", "not", "inc", "out", "can", "what", "but", "more", "_", "_xyz", "_szilagyi", "and", "the", "to", "of", "t.co", "RT", "is", "on", "in", "a", "i", "you", "for", "are", "that", "from", "with", "have", "this", "be", "the", "I", "it", "The", "_vanepps", "at", "your", "will", "was", "my", "about", "as", "so", "all", "by", "an", "just", "if", "me", "we", "This", "then", "or", "If"]
+
+       # Iterate over the common words and set their frequency to 0 in the word_counts dictionary
         for word in common_words:
             word_counts[word] = 0
+
 
         # Generate the word cloud
         wordcloud = WordCloud().generate_from_frequencies(word_counts)
@@ -47,9 +52,6 @@ def run_task(run):
             os.makedirs("Z:\\Python\\WordCloud\\Image\\")
 
         wordcloud.to_file("Z:\\Python\\WordCloud\\Image\\wordcloud.png")
-        
-        #Close task window
-        root.destroy()
 
         # Rename the file with the current date and time
         current_date_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -62,7 +64,7 @@ def run_task(run):
         plt.axis("off")
 
         # Add the file name to the bottom of the image
-        plt.text(0.5, -0.2, "Focused_{}.png".format(current_date_time), horizontalalignment="center")
+        plt.text(0.5, -0.2, "Focused_{}.png".format(current_date_time), horizontalalignment="left")
 
         plt.show()
 
@@ -75,7 +77,7 @@ root = tk.Tk()
 root.geometry("200x100")
 
 # Add a label asking the user if they want to run the task
-label = tk.Label(root, text="Do you want to run the task?")
+label = tk.Label(root, text=" Initiate Focused scan? ")
 label.pack()
 
 # Add a "Yes" button that will call the "run_task" function with the "True" argument when clicked
@@ -88,4 +90,6 @@ no_button.pack()
 
 # Start the event loop
 root.mainloop()
+
+#Run next list scan
 
