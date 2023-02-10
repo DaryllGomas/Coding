@@ -5,11 +5,11 @@ Import-Module VMware.PowerCLI
 Connect-VIServer localhost
 
 # Define the virtual machine configuration
-$VMName = "MyVirtualMachine"
+$VMName = "Win10Client"
 $GuestOS = "Windows10_64"
-$MemoryMB = 2048
+$MemoryMB = 4096
 $NumCpu = 2
-$DiskGB = 50
+$DiskGB = 30
 
 # Create a new virtual machine
 New-VM -Name $VMName -GuestId $GuestOS -MemoryMB $MemoryMB -NumCpu $NumCpu -DiskGB $DiskGB -NetworkName "Bridged"
