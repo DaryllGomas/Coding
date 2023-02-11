@@ -5,5 +5,3 @@ Uninstall-WindowsFeature -Name AD-Domain-Services
 Import-Module ADDSDeployment
 Uninstall-ADDSForest -Confirm:$false
 
-# Restart the server
-Restart-Computer
