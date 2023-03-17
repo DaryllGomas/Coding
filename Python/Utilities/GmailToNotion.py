@@ -8,7 +8,6 @@ from notion_client import Client
 from email.parser import BytesParser
 from email.policy import default
 from bs4 import BeautifulSoup
-import openai
 
 # Set up Notion client
 os.environ["NOTION_API_KEY"] = "Notion API"
