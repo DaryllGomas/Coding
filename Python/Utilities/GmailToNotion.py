@@ -10,9 +10,9 @@ from email.policy import default
 from bs4 import BeautifulSoup
 
 # Set up Notion client
-os.environ["NOTION_API_KEY"] = "Notion API"
+os.environ["NOTION_API_KEY"] = "Enter You Notion API Key"
 notion = Client(auth=os.environ["NOTION_API_KEY"])
-database_id = "Notion Database"  # Replace with your Notion database ID
+database_id = "Enter the Database ID"  # Replace with your Notion database ID
 
 # Set up Gmail API
 SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
@@ -24,7 +24,8 @@ if not creds or not creds.valid:
     if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
     else:
-        flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file('C:/Users/(Enter your account name on windows machine)/Documents/scripts/credentials.json', SCOPES)
+
         creds = flow.run_local_server(port=0)
     with open('token.json', 'w') as token:
         token.write(creds.to_json())
@@ -47,6 +48,10 @@ def create_notion_page(subject, body):
     lines = text_content.split('\n')
     cleaned_lines = [line.strip() for line in lines if line.strip()]
     cleaned_text_content = '\n'.join(cleaned_lines)
+    
+    #Truncate to include only the first 2000 characters
+    if len(cleaned_text_content) > 2000:
+        cleaned_text_content = cleaned_text_content[:2000]
     
     new_page = {
         "Subject": {"title": [{"text": {"content": subject}}]},
