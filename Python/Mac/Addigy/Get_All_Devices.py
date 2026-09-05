@@ -31,7 +31,7 @@ if __name__ == "__main__":
     url: str = f"https://prod.addigy.com/api/devices?client_id={clientID}&client_secret={clientSecret}"
 
     # Headers needed for the Request
-    headers = {'Cookie': 'sessionid=e30:1qG4PW:8_g6N8G8V-JTli0SOM6tZNwXbcA'}
+    headers = {'Cookie': 'sessionid=-'}
 
     # Will perform the API Request
     response: Response = requests.get(url, headers=headers)

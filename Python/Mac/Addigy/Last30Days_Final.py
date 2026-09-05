@@ -64,7 +64,7 @@ if __name__ == "__main__":
     # The payloads and Headers needed for the Request
     payload = {}
     headers = {
-        'Cookie': 'sessionid=e30:1qG4PW:8_g6N8G8V-JTli0SOM6tZNwXbcA'
+        'Cookie': 'sessionid=-'
     }
 
     # Will perform the API Request

@@ -83,7 +83,7 @@ if __name__ == "__main__":
     
     url: str = "https://prod.addigy.com/api/devices?client_id=" + clientID + "&client_secret=" + clientSecret
     payload = {}
-    headers = {'Cookie': 'sessionid=e30:1qG4PW:8_g6N8G8V-JTli0SOM6tZNwXbcA'}
+    headers = {'Cookie': 'sessionid=-'}
 
     response: Response = requests.request("GET", url, headers=headers, data=payload)
     devices = response.json()

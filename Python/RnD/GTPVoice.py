@@ -4,7 +4,7 @@ import openai
 import winsound
 
 # Set your API key
-openai.api_key = "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"
+openai.api_key = "-"      # redacted 2026-09-05 - key revoked
 
 def listen_for_prompt():
     try:

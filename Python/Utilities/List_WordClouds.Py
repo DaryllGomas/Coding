@@ -61,10 +61,10 @@ for l in list_name:
     run_task(l["id"], l["name"])
 
 # Your Twitter API keys
-consumer_key = 'LwiJhxcRP7rw3QuVoDxyDwEpa'
-consumer_secret = 'MVMPTIPqJnF8NeK1g07Aohkfe0XVJbLI3MBjDNjAZ7QFZAZnHT'
-access_token = '1296735650717167616-JeXIFW5hb9evw9oyVz2UU7MxorQT98'
-access_token_secret = '6ZDVhlHvZHJR8t84aPDMGEu6QAh4l6GGedLnBI7lebh8P'
+consumer_key = '-'      # redacted 2026-09-05 - key revoked, was never meant to be committed
+consumer_secret = '-'      # redacted 2026-09-05 - key revoked, was never meant to be committed
+access_token = '-'      # redacted 2026-09-05 - key revoked, was never meant to be committed
+access_token_secret = '-'      # redacted 2026-09-05 - key revoked, was never meant to be committed
 
 # Authenticate with Twitter API
 auth = tweepy.OAuth1UserHandler(consumer_key, consumer_secret, access_token, access_token_secret)
